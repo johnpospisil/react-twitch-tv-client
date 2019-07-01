@@ -28,9 +28,9 @@ renderInput = ({ input, label, meta }) => {
   );
 }
 
-onSubmit(formValues) {
+onSubmit = formValues => {
   // console.log(formValues);
-
+  this.props.createStream(formValues);
 }
 
   render() {
@@ -59,7 +59,9 @@ const validate = formValues => {
   return errors;
 };
 
-export default reduxForm({
+const formWrapped =  reduxForm({
   form: 'streamCreate',
   validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formWrapped);
